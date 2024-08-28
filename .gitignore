@@ -1,0 +1,13 @@
+# Editors
+.idea/
+.vscode/
+
+# Rust
+**/target/
+
+# Data used in testing
+**/testdata/
+**/proptest-regressions/
+
+# macOS
+**/.DS_Store
