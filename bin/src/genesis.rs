@@ -1,5 +1,8 @@
 use {
-    crate::ext::{cometbft_genesis_path, g_home_dir, read_wasm_file, PathBuffExt, Writer},
+    crate::ext::{
+        cometbft_config_path, cometbft_genesis_path, g_home_dir, read_wasm_file, PathBuffExt,
+        Writer,
+    },
     app_types::{
         account_factory::{self, GenesisUser},
         auth::{AccountId, AccountType, Key, Username},
@@ -8,8 +11,8 @@ use {
     bip32::{Language, Mnemonic},
     clap::Subcommand,
     grug::{
-        btree_map, Addr, Coins, Hash256, HashExt, Json, JsonSerExt, NumberConst, Udec256,
-        GENESIS_SENDER,
+        btree_map, Addr, Coins, Hash256, HashExt, Json, JsonSerExt, NumberConst, StdResult,
+        Udec256, GENESIS_SENDER,
     },
     grug_client::{AdminOption, GenesisBuilder, SigningKey},
     rand::rngs::OsRng,
@@ -17,6 +20,8 @@ use {
 };
 
 const GENESIS_FILE: &str = "genesis.json";
+
+const DEFAULT_COINS: &str = "ugrug:1000";
 
 #[grug::derive(Serde)]
 struct Genesis {
@@ -46,6 +51,12 @@ impl Account {
             ..Default::default()
         }
     }
+
+    pub fn rand_with_coins(name: &str, coins: Coins) -> Self {
+        let mut val = Self::rand(name);
+        val.initial_balance = coins;
+        val
+    }
 }
 
 #[derive(Subcommand)]
@@ -70,13 +81,18 @@ fn generate(dir: PathBuf, counter: usize) -> anyhow::Result<()> {
         vec![Account {
             name: "replace me!".to_string(),
             menmonic: "replace me!".to_string(),
+            initial_balance: Coins::from_str(DEFAULT_COINS)?,
             ..Default::default()
         }]
     } else {
         (0..counter)
-            // .iter()
-            .map(|i| Account::rand(&format!("account_{}", i)))
-            .collect()
+            .map(|i| {
+                Ok(Account::rand_with_coins(
+                    &format!("account_{}", i),
+                    Coins::from_str(DEFAULT_COINS)?,
+                ))
+            })
+            .collect::<StdResult<_>>()?
     };
 
     let genesis = Genesis {
@@ -109,6 +125,14 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
         }
     };
 
+    // Change CORS on cometbft config.toml
+    let config: String = cometbft_config_path()?.read_string::<String>()?.replace(
+        "cors_allowed_origins = []",
+        "cors_allowed_origins = [\"*\"]",
+    );
+
+    std::fs::write(cometbft_config_path()?, config)?;
+
     let mut builder = GenesisBuilder::new();
 
     let hash_taxman = builder.upload(read_wasm_file("app_taxman.wasm")?)?;
@@ -121,8 +145,6 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
     let initial_balances = &mut BTreeMap::new();
 
     let account_factory = Addr::compute(GENESIS_SENDER, hash_account_factory, b"salt");
-
-    println!("account_factory: {account_factory}");
 
     for account in genesis_config.accounts.iter_mut() {
         add_user(
@@ -198,11 +220,6 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
     genesis_config.write_pretty_json(dir.join(GENESIS_FILE))?;
 
     genesis_cometbft.write_pretty_json(cometbft_genesis_path()?)?;
-
-    println!("hash account spot: {:?}", hash_account_spot);
-    println!("hash account factory: {:?}", hash_account_factory);
-    println!("hash taxman: {:?}", hash_taxman);
-    println!("hash app bank: {:?}", hash_app_bank);
 
     Ok(())
 }

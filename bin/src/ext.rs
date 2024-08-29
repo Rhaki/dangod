@@ -1,4 +1,7 @@
-use std::path::{Path, PathBuf};
+use std::{
+    path::{Path, PathBuf},
+    str::FromStr,
+};
 
 use grug::{Binary, JsonDeExt};
 use home::home_dir;
@@ -6,6 +9,11 @@ use serde::de::DeserializeOwned;
 
 pub trait PathBuffExt {
     fn read<T: DeserializeOwned>(&self) -> anyhow::Result<T>;
+
+    fn read_string<T>(&self) -> anyhow::Result<T>
+    where
+        T: FromStr,
+        T::Err: std::error::Error + Send + Sync + 'static;
 
     fn read_raw(&self) -> anyhow::Result<Vec<u8>>;
 }
@@ -16,6 +24,17 @@ impl PathBuffExt for PathBuf {
             .map_err(|_| anyhow::anyhow!("Failed to read file: {:?}", self))?
             .deserialize_json()
             .map_err(Into::into)
+    }
+
+    fn read_string<T>(&self) -> anyhow::Result<T>
+    where
+        T: FromStr,
+        T::Err: std::error::Error + Send + Sync + 'static,
+    {
+        Ok(std::fs::read_to_string(self)
+            .map_err(|_| anyhow::anyhow!("Failed to read file: {:?}", self))?
+            .parse()?)
+        // .map_err(Into::into)
     }
 
     fn read_raw(&self) -> anyhow::Result<Vec<u8>> {
@@ -43,6 +62,10 @@ pub fn g_home_dir() -> anyhow::Result<PathBuf> {
 
 pub fn cometbft_genesis_path() -> anyhow::Result<PathBuf> {
     Ok(g_home_dir()?.join(".cometbft/config/genesis.json"))
+}
+
+pub fn cometbft_config_path() -> anyhow::Result<PathBuf> {
+    Ok(g_home_dir()?.join(".cometbft/config/config.toml"))
 }
 
 pub fn read_wasm_file(filename: &str) -> anyhow::Result<Binary> {

@@ -18,8 +18,10 @@ colored            = "2"
 colored_json       = "5"
 dialoguer          = "0.11"
 digest             = "0.10"
-grug               = { git = "https://github.com/left-curve/grug", rev = "cd5d610" }
-grug-client        = { git = "https://github.com/left-curve/grug", rev = "cd5d610" }
+grug               = { git = "https://github.com/left-curve/grug", rev = "a34067cc01556e80fd264befc8b1066ebeb0a50c" }
+grug-client        = { git = "https://github.com/left-curve/grug", rev = "a34067cc01556e80fd264befc8b1066ebeb0a50c" }
+# grug               = { path = "../grug/crates/std"}
+# grug-client        = { path = "../grug/crates/client" }
 app-types          = { path = "../app/crates/types" } 
 hex                = "0.4"
 home               = "0.5"
@@ -27,6 +29,7 @@ rand               = "0.8"
 serde              = "1"
 serde_json         = "1"
 tendermint-rpc     = "0.39"
+toml               = "0.8"
 tokio              = "1"
 tracing            = "0.1"
 tracing-subscriber = "0.3"
