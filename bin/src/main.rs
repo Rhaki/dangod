@@ -7,7 +7,7 @@ mod ext;
 mod genesis;
 mod types;
 
-const DEFAULT_APP_DIR: &str = ".rgrug";
+const DEFAULT_APP_DIR: &str = ".dagnod";
 
 #[derive(Parser)]
 #[command(author, version, about, next_display_order = None)]
@@ -24,7 +24,7 @@ struct Cli {
 
 #[derive(Parser)]
 enum Command {
-    #[command(subcommand, next_display_order = None)]
+    #[command(subcommand, next_display_order = None, alias = "g")]
     Genesis(GenesisCommand),
     Start,
 }

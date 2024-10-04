@@ -18,6 +18,10 @@ use {
 const GENESIS_FILE: &str = "genesis.json";
 const DEFAULT_COINS: &str = "ugrug:1000";
 
+const FEE_DENOM: &str = "ugrug";
+const FEE_RATE: Udec128 = Udec128::ZERO;
+const DENOM_FEE_CREATION: Uint128 = Uint128::new(1);
+
 #[derive(Subcommand)]
 pub enum GenesisCommand {
     Build,
@@ -63,9 +67,9 @@ fn generate(dir: PathBuf, counter: usize) -> anyhow::Result<()> {
 
     let genesis = Genesis {
         accounts,
-        fee_rate: Udec128::ZERO,
-        fee_denom: "ugrug".to_string(),
-        fee_denom_creation: Uint128::new(0),
+        fee_rate: FEE_RATE,
+        fee_denom: FEE_DENOM.to_string(),
+        fee_denom_creation: DENOM_FEE_CREATION,
         contracts: BTreeMap::default(),
     };
 
@@ -101,13 +105,13 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
 
     let codes = {
         let account_factory = read_wasm_file("dango_account_factory.wasm")?;
-        let account_spot = read_wasm_file("app_account_spot.wasm")?;
-        let account_safe = read_wasm_file("app_account_safe.wasm")?;
-        let amm = read_wasm_file("app_amm.wasm")?;
-        let bank = read_wasm_file("app_bank.wasm")?;
-        let ibc_transfer = read_wasm_file("app_mock_ibc_transfer.wasm")?;
-        let taxman = read_wasm_file("app_taxman.wasm")?;
-        let token_factory = read_wasm_file("app_token_factory.wasm")?;
+        let account_safe = read_wasm_file("dango_account_safe.wasm")?;
+        let account_spot = read_wasm_file("dango_account_spot.wasm")?;
+        let amm = read_wasm_file("dango_amm.wasm")?;
+        let bank = read_wasm_file("dango_bank.wasm")?;
+        let ibc_transfer = read_wasm_file("dango_ibc_transfer.wasm")?;
+        let taxman = read_wasm_file("dango_taxman.wasm")?;
+        let token_factory = read_wasm_file("dango_token_factory.wasm")?;
 
         Codes {
             account_factory,
@@ -125,29 +129,24 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
         .accounts
         .iter()
         .map(|(username, account)| {
-            let key = Mnemonic::new(account.menmonic.clone(), Language::English)
-                .unwrap()
-                .to_seed("");
-            let sk: SigningKey =
-                XPrv::derive_from_path(&key, &"m/44'/60'/0'/0/0".to_string().parse().unwrap())
-                    .unwrap()
-                    .into();
+            let seed = Mnemonic::new(account.menmonic.clone(), Language::English)?.to_seed("");
+            let pk_bytes = SigningKey::from(XPrv::derive_from_path(
+                &seed,
+                &"m/44'/60'/0'/0/0".to_string().parse()?,
+            )?)
+            .public_key()
+            .to_bytes();
 
-            let vk = sk.public_key();
-            let bytes = vk.to_bytes();
-            let key_hash = bytes.hash160();
-            let key = Key::Secp256k1(bytes.into());
-
-            (
+            Ok((
                 username.clone(),
                 GenesisUser {
-                    key,
-                    key_hash,
+                    key: Key::Secp256k1(pk_bytes.into()),
+                    key_hash: pk_bytes.hash160(),
                     balances: account.initial_balance.clone(),
                 },
-            )
+            ))
         })
-        .collect();
+        .collect::<anyhow::Result<_>>()?;
 
     let (genesis_state, contracts, addresses) = build_genesis(
         codes,
@@ -161,7 +160,7 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
 
     for (username, account) in genesis_config.accounts.iter_mut() {
         if let Some(address) = addresses.get(username) {
-            account.address = Some(address.clone())
+            account.address = Some(*address)
         };
     }
 
