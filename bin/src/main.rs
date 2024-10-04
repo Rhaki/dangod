@@ -3,9 +3,9 @@ use {
     tracing::level_filters::LevelFilter,
 };
 
-mod genesis;
-
 mod ext;
+mod genesis;
+mod types;
 
 const DEFAULT_APP_DIR: &str = ".rgrug";
 
@@ -51,9 +51,7 @@ async fn main() -> anyhow::Result<()> {
                 .arg("start")
                 .spawn()?;
 
-            std::process::Command::new("grug")
-                .arg("start")
-                .status()?;
+            std::process::Command::new("grug").arg("start").status()?;
 
             Ok(())
         }

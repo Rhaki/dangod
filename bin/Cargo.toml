@@ -1,26 +1,28 @@
 [package]
-name          = "rgrug"
+name          = "dangod"
 version       = { workspace = true }
 authors       = { workspace = true }
 edition       = { workspace = true }
 rust-version  = { workspace = true }
 
 [[bin]]
-name = "rgrug"
+name = "dangod"
 path = "src/main.rs"
 
 [dependencies]
-app-types          = { workspace = true }
 anyhow             = { workspace = true }
 bip32              = { workspace = true }
 clap               = { workspace = true, features = ["derive", "wrap_help"] }
 colored            = { workspace = true }
 colored_json       = { workspace = true }
+dango-genesis      = { workspace = true }
+dango-types        = { workspace = true }
 dialoguer          = { workspace = true }
 grug               = { workspace = true }
 grug-client        = { workspace = true }
 hex                = { workspace = true }
 home               = { workspace = true }
+k256               = { workspace = true }
 rand               = { workspace = true }
 serde              = { workspace = true }
 serde_json         = { workspace = true }

@@ -18,13 +18,13 @@ colored            = "2"
 colored_json       = "5"
 dialoguer          = "0.11"
 digest             = "0.10"
-grug               = { git = "https://github.com/left-curve/grug", rev = "a34067cc01556e80fd264befc8b1066ebeb0a50c" }
-grug-client        = { git = "https://github.com/left-curve/grug", rev = "a34067cc01556e80fd264befc8b1066ebeb0a50c" }
-# grug               = { path = "../grug/crates/std"}
-# grug-client        = { path = "../grug/crates/client" }
-app-types          = { path = "../app/crates/types" } 
+grug               = { git = "https://github.com/left-curve/left-curve" }
+grug-client        = { git = "https://github.com/left-curve/left-curve" }
+dango-genesis      = { git = "https://github.com/left-curve/left-curve" } 
+dango-types        = { git = "https://github.com/left-curve/left-curve" } 
 hex                = "0.4"
 home               = "0.5"
+k256               = "0.13"
 rand               = "0.8"
 serde              = "1"
 serde_json         = "1"
