@@ -1,11 +1,12 @@
-use std::{
-    path::{Path, PathBuf},
-    str::FromStr,
+use {
+    grug::{Binary, JsonDeExt},
+    home::home_dir,
+    serde::de::DeserializeOwned,
+    std::{
+        path::{Path, PathBuf},
+        str::FromStr,
+    },
 };
-
-use grug::{Binary, JsonDeExt};
-use home::home_dir;
-use serde::de::DeserializeOwned;
 
 pub trait PathBuffExt {
     fn read<T: DeserializeOwned>(&self) -> anyhow::Result<T>;

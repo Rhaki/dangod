@@ -51,7 +51,7 @@ async fn main() -> anyhow::Result<()> {
                 .arg("start")
                 .spawn()?;
 
-            std::process::Command::new("grug").arg("start").status()?;
+            std::process::Command::new("dango").arg("start").status()?;
 
             Ok(())
         }

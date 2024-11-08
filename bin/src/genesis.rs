@@ -10,17 +10,19 @@ use {
     clap::Subcommand,
     dango_genesis::{build_genesis, Codes, GenesisUser},
     dango_types::{account_factory::Username, auth::Key},
-    grug::{Coins, HashExt, Json, JsonSerExt, NumberConst, Udec128, Uint128},
+    grug::{
+        Coins, Denom, Duration, HashExt, Inner, Json, JsonSerExt, NumberConst, Udec128, Uint128,
+    },
     k256::ecdsa::SigningKey,
     std::{collections::BTreeMap, path::PathBuf, str::FromStr},
 };
 
 const GENESIS_FILE: &str = "genesis.json";
 const DEFAULT_COINS: &str = "ugrug:1000";
-
 const FEE_DENOM: &str = "ugrug";
 const FEE_RATE: Udec128 = Udec128::ZERO;
 const DENOM_FEE_CREATION: Uint128 = Uint128::new(1);
+const DEFAULT_MAX_ORPHAN_AGE: Duration = Duration::from_seconds(7 * 24 * 60 * 60);
 
 #[derive(Subcommand)]
 pub enum GenesisCommand {
@@ -44,7 +46,7 @@ fn generate(dir: PathBuf, counter: usize) -> anyhow::Result<()> {
         vec![(
             Username::from_str("mock_account")?,
             Account {
-                menmonic: "replace me!".to_string(),
+                mnemonic: "replace me!".to_string(),
                 initial_balance: Coins::from_str(DEFAULT_COINS)?,
                 address: None,
             },
@@ -68,9 +70,10 @@ fn generate(dir: PathBuf, counter: usize) -> anyhow::Result<()> {
     let genesis = Genesis {
         accounts,
         fee_rate: FEE_RATE,
-        fee_denom: FEE_DENOM.to_string(),
+        fee_denom: Denom::from_str(FEE_DENOM)?,
         fee_denom_creation: DENOM_FEE_CREATION,
         contracts: BTreeMap::default(),
+        max_orphan_age: DEFAULT_MAX_ORPHAN_AGE,
     };
 
     let path = dir.join(GENESIS_FILE);
@@ -113,6 +116,10 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
         let taxman = read_wasm_file("dango_taxman.wasm")?;
         let token_factory = read_wasm_file("dango_token_factory.wasm")?;
 
+        let account_margin = read_wasm_file("dango_account_margin.wasm")?;
+        let lending = read_wasm_file("dango_lending.wasm")?;
+        let oracle = read_wasm_file("dango_oracle.wasm")?;
+
         Codes {
             account_factory,
             account_spot,
@@ -122,6 +129,9 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
             ibc_transfer,
             taxman,
             token_factory,
+            account_margin,
+            lending,
+            oracle,
         }
     };
 
@@ -129,7 +139,7 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
         .accounts
         .iter()
         .map(|(username, account)| {
-            let seed = Mnemonic::new(account.menmonic.clone(), Language::English)?.to_seed("");
+            let seed = Mnemonic::new(account.mnemonic.clone(), Language::English)?.to_seed("");
             let pk_bytes = SigningKey::from(XPrv::derive_from_path(
                 &seed,
                 &"m/44'/60'/0'/0/0".to_string().parse()?,
@@ -152,10 +162,10 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
         codes,
         users,
         &genesis_config.owner()?.0,
-        &genesis_config.fee_recipient()?.0,
         genesis_config.fee_denom.clone(),
         genesis_config.fee_rate,
-        genesis_config.fee_denom_creation,
+        Some(genesis_config.fee_denom_creation),
+        genesis_config.max_orphan_age,
     )?;
 
     for (username, account) in genesis_config.accounts.iter_mut() {
@@ -175,7 +185,7 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
     .into_iter()
     .collect();
 
-    genesis_cometbft["app_state"] = genesis_state.to_json_value()?;
+    genesis_cometbft["app_state"] = genesis_state.to_json_value()?.into_inner();
 
     genesis_config.write_pretty_json(dir.join(GENESIS_FILE))?;
 
@@ -185,7 +195,7 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
 }
 
 fn reset() -> anyhow::Result<()> {
-    std::fs::remove_file(g_home_dir()?.join(".rgrug/genesis.json"))?;
+    std::fs::remove_file(g_home_dir()?.join(".dagnod/genesis.json"))?;
     std::fs::remove_dir_all(g_home_dir()?.join(".cometbft/data"))?;
     std::fs::remove_dir_all(g_home_dir()?.join(".cometbft/config"))?;
     std::fs::remove_dir_all(g_home_dir()?.join(".grug/data"))?;

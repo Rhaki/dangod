@@ -1,7 +1,7 @@
 use {
     bip32::{Language, Mnemonic},
     dango_types::account_factory::Username,
-    grug::{Addr, Coins, Udec128, Uint128},
+    grug::{Addr, Coins, Denom, Duration, Udec128, Uint128},
     rand::rngs::OsRng,
     std::{collections::BTreeMap, str::FromStr},
 };
@@ -10,9 +10,10 @@ use {
 pub struct Genesis {
     pub accounts: BTreeMap<Username, Account>,
     pub fee_rate: Udec128,
-    pub fee_denom: String,
+    pub fee_denom: Denom,
     pub fee_denom_creation: Uint128,
     pub contracts: BTreeMap<String, Addr>,
+    pub max_orphan_age: Duration,
 }
 
 impl Genesis {
@@ -20,7 +21,7 @@ impl Genesis {
         self.account("owner")
     }
 
-    pub fn fee_recipient(&self) -> anyhow::Result<(Username, &Account)> {
+    pub fn _fee_recipient(&self) -> anyhow::Result<(Username, &Account)> {
         self.account("fee_recipient")
     }
 
@@ -36,7 +37,7 @@ impl Genesis {
 
 #[grug::derive(Serde)]
 pub struct Account {
-    pub menmonic: String,
+    pub mnemonic: String,
     pub initial_balance: Coins,
     pub address: Option<Addr>,
 }
@@ -44,7 +45,7 @@ pub struct Account {
 impl Account {
     pub fn rand() -> Self {
         Self {
-            menmonic: Mnemonic::random(OsRng, Language::English)
+            mnemonic: Mnemonic::random(OsRng, Language::English)
                 .phrase()
                 .to_string(),
             initial_balance: Coins::default(),
