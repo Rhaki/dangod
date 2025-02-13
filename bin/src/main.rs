@@ -1,10 +1,12 @@
-use {clap::Parser, ext::g_home_dir, std::path::PathBuf, tracing::level_filters::LevelFilter};
+use {clap::Parser, std::path::PathBuf, tracing::level_filters::LevelFilter};
 
-mod ext;
-mod genesis;
-mod types;
+pub mod ext;
+pub mod genesis;
+pub mod types;
 
-const DEFAULT_APP_DIR: &str = ".dagnod";
+pub use {ext::*, genesis::*, types::*};
+
+pub const DEFAULT_APP_DIR: &str = ".dagnod";
 
 #[derive(Parser)]
 #[command(author, version, about, next_display_order = None)]
