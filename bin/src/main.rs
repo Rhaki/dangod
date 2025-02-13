@@ -1,7 +1,4 @@
-use {
-    clap::Parser, ext::g_home_dir, genesis::GenesisCommand, std::path::PathBuf,
-    tracing::level_filters::LevelFilter,
-};
+use {clap::Parser, ext::g_home_dir, std::path::PathBuf, tracing::level_filters::LevelFilter};
 
 mod ext;
 mod genesis;
@@ -24,8 +21,10 @@ struct Cli {
 
 #[derive(Parser)]
 enum Command {
-    #[command(subcommand, next_display_order = None, alias = "g")]
-    Genesis(GenesisCommand),
+    Build,
+    Generate { counter: usize },
+    GenerateStatic,
+    Reset,
     Start,
 }
 
@@ -44,16 +43,16 @@ async fn main() -> anyhow::Result<()> {
     }
 
     match cli.command {
-        Command::Genesis(cmd) => cmd.run(app_dir),
         Command::Start => {
-            // Start the app
             std::process::Command::new("cometbft")
                 .arg("start")
                 .spawn()?;
-
             std::process::Command::new("dango").arg("start").status()?;
-
             Ok(())
         }
+        Command::Build => genesis::build(app_dir),
+        Command::Generate { counter } => genesis::generate_random(app_dir, counter),
+        Command::GenerateStatic => genesis::generate_static(app_dir),
+        Command::Reset => genesis::reset(),
     }
 }

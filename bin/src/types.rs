@@ -1,5 +1,10 @@
 use {
-    bip32::{Language, Mnemonic}, dango_genesis::Contracts, dango_types::account_factory::Username, grug::{Addr, Coins, Denom, Duration, Udec128, Uint128}, rand::rngs::OsRng, std::{collections::BTreeMap, str::FromStr}
+    bip32::{Language, Mnemonic},
+    dango_genesis::Contracts,
+    dango_types::account_factory::Username,
+    grug::{Addr, Coins, Denom, Duration, Udec128, Uint128},
+    rand::rngs::OsRng,
+    std::{collections::BTreeMap, str::FromStr},
 };
 
 #[grug::derive(Serde)]
@@ -45,6 +50,14 @@ impl Account {
                 .phrase()
                 .to_string(),
             initial_balance: Coins::default(),
+            address: None,
+        }
+    }
+
+    pub fn static_with_coins(mnemonic: &str, coins: Coins) -> Self {
+        Self {
+            mnemonic: mnemonic.to_string(),
+            initial_balance: coins,
             address: None,
         }
     }
