@@ -18,14 +18,10 @@ colored            = "2"
 colored_json       = "5"
 dialoguer          = "0.11"
 digest             = "0.10"
-# grug               = { git = "https://github.com/left-curve/left-curve", branch = "dango/multithread-pp"}
-# grug-client        = { git = "https://github.com/left-curve/left-curve", branch = "dango/multithread-pp"}
-# dango-genesis      = { git = "https://github.com/left-curve/left-curve", branch = "dango/multithread-pp"}
-# dango-types        = { git = "https://github.com/left-curve/left-curve", branch = "dango/multithread-pp"}
-grug               = { path = "../left-curve/grug/std"}
-grug-client        = { path = "../left-curve/grug/client"}
-dango-genesis      = { path = "../left-curve/dango/genesis"}
-dango-types        = { path = "../left-curve/dango/types"}
+grug               = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
+grug-client        = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
+dango-genesis      = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
+dango-types        = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
 hex                = "0.4"
 home               = "0.5"
 k256               = "0.13"

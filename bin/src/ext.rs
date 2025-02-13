@@ -1,5 +1,5 @@
 use {
-    grug::{Binary, JsonDeExt},
+    grug::JsonDeExt,
     home::home_dir,
     serde::de::DeserializeOwned,
     std::{
@@ -15,8 +15,6 @@ pub trait PathBuffExt {
     where
         T: FromStr,
         T::Err: std::error::Error + Send + Sync + 'static;
-
-    fn read_raw(&self) -> anyhow::Result<Vec<u8>>;
 }
 
 impl PathBuffExt for PathBuf {
@@ -36,10 +34,6 @@ impl PathBuffExt for PathBuf {
             .map_err(|_| anyhow::anyhow!("Failed to read file: {:?}", self))?
             .parse()?)
         // .map_err(Into::into)
-    }
-
-    fn read_raw(&self) -> anyhow::Result<Vec<u8>> {
-        std::fs::read(self).map_err(Into::into)
     }
 }
 
@@ -67,13 +61,4 @@ pub fn cometbft_genesis_path() -> anyhow::Result<PathBuf> {
 
 pub fn cometbft_config_path() -> anyhow::Result<PathBuf> {
     Ok(g_home_dir()?.join(".cometbft/config/config.toml"))
-}
-
-pub fn read_wasm_file(filename: &str) -> anyhow::Result<Binary> {
-    let path = PathBuf::from(format!(
-        "{}/../artifacts/{filename}",
-        env!("CARGO_MANIFEST_DIR")
-    ));
-
-    path.read_raw().map(Into::into)
 }

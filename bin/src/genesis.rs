@@ -1,17 +1,20 @@
 use {
     crate::{
-        ext::{
-            cometbft_config_path, cometbft_genesis_path, g_home_dir, read_wasm_file, PathBuffExt,
-            Writer,
-        },
+        ext::{cometbft_config_path, cometbft_genesis_path, g_home_dir, PathBuffExt, Writer},
         types::{Account, Genesis},
     },
     bip32::{Language, Mnemonic, PrivateKey, PublicKey, XPrv},
     clap::Subcommand,
-    dango_genesis::{build_genesis, Codes, GenesisUser},
-    dango_types::{account_factory::Username, auth::Key},
+    dango_genesis::{build_genesis, GenesisConfig, GenesisUser},
+    dango_types::{
+        account_factory::Username,
+        auth::Key,
+        constants::{GUARDIAN_SETS, PYTH_PRICE_SOURCES},
+        taxman,
+    },
     grug::{
-        Coins, Denom, Duration, HashExt, Inner, Json, JsonSerExt, NumberConst, Udec128, Uint128,
+        btree_map, Coins, Denom, Duration, HashExt, Inner, Json, JsonSerExt, NumberConst, Udec128,
+        Uint128,
     },
     k256::ecdsa::SigningKey,
     std::{collections::BTreeMap, path::PathBuf, str::FromStr},
@@ -72,7 +75,7 @@ fn generate(dir: PathBuf, counter: usize) -> anyhow::Result<()> {
         fee_rate: FEE_RATE,
         fee_denom: Denom::from_str(FEE_DENOM)?,
         fee_denom_creation: DENOM_FEE_CREATION,
-        contracts: BTreeMap::default(),
+        contracts: None,
         max_orphan_age: DEFAULT_MAX_ORPHAN_AGE,
     };
 
@@ -106,34 +109,7 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
 
     std::fs::write(cometbft_config_path()?, config)?;
 
-    let codes = {
-        let account_factory = read_wasm_file("dango_account_factory.wasm")?;
-        let account_safe = read_wasm_file("dango_account_safe.wasm")?;
-        let account_spot = read_wasm_file("dango_account_spot.wasm")?;
-        let amm = read_wasm_file("dango_amm.wasm")?;
-        let bank = read_wasm_file("dango_bank.wasm")?;
-        let ibc_transfer = read_wasm_file("dango_ibc_transfer.wasm")?;
-        let taxman = read_wasm_file("dango_taxman.wasm")?;
-        let token_factory = read_wasm_file("dango_token_factory.wasm")?;
-
-        let account_margin = read_wasm_file("dango_account_margin.wasm")?;
-        let lending = read_wasm_file("dango_lending.wasm")?;
-        let oracle = read_wasm_file("dango_oracle.wasm")?;
-
-        Codes {
-            account_factory,
-            account_spot,
-            account_safe,
-            amm,
-            bank,
-            ibc_transfer,
-            taxman,
-            token_factory,
-            account_margin,
-            lending,
-            oracle,
-        }
-    };
+    let codes = dango_genesis::build_rust_codes();
 
     let users: BTreeMap<Username, GenesisUser> = genesis_config
         .accounts
@@ -151,22 +127,33 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
                 username.clone(),
                 GenesisUser {
                     key: Key::Secp256k1(pk_bytes.into()),
-                    key_hash: pk_bytes.hash160(),
+                    key_hash: pk_bytes.hash256(),
                     balances: account.initial_balance.clone(),
                 },
             ))
         })
         .collect::<anyhow::Result<_>>()?;
 
-    let (genesis_state, contracts, addresses) = build_genesis(
+    let (genesis_state, contracts, addresses) = build_genesis(GenesisConfig {
         codes,
         users,
-        &genesis_config.owner()?.0,
-        genesis_config.fee_denom.clone(),
-        genesis_config.fee_rate,
-        Some(genesis_config.fee_denom_creation),
-        genesis_config.max_orphan_age,
-    )?;
+        owner: genesis_config.owner()?.0,
+        fee_cfg: taxman::Config {
+            fee_denom: genesis_config.fee_denom.clone(),
+            fee_rate: genesis_config.fee_rate,
+        },
+        max_orphan_age: genesis_config.max_orphan_age,
+        metadatas: btree_map! {},
+        pairs: vec![],
+        markets: btree_map! {},
+        price_sources: PYTH_PRICE_SOURCES.clone(),
+        unlocking_cliff: Duration::from_weeks(4 * 9),
+        unlocking_period: Duration::from_weeks(4 * 27),
+        wormhole_guardian_sets: GUARDIAN_SETS.clone(),
+        hyperlane_local_domain: 88888888,
+        hyperlane_ism_validator_sets: btree_map! {},
+        warp_routes: btree_map! {},
+    })?;
 
     for (username, account) in genesis_config.accounts.iter_mut() {
         if let Some(address) = addresses.get(username) {
@@ -174,16 +161,7 @@ fn build(dir: PathBuf) -> anyhow::Result<()> {
         };
     }
 
-    genesis_config.contracts = vec![
-        ("account_factory".to_string(), contracts.account_factory),
-        ("amm".to_string(), contracts.amm),
-        ("bank".to_string(), contracts.bank),
-        ("ibc_transfer".to_string(), contracts.ibc_transfer),
-        ("taxman".to_string(), contracts.taxman),
-        ("token_factory".to_string(), contracts.token_factory),
-    ]
-    .into_iter()
-    .collect();
+    genesis_config.contracts = Some(contracts);
 
     genesis_cometbft["app_state"] = genesis_state.to_json_value()?.into_inner();
 
