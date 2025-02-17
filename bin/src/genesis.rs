@@ -172,6 +172,7 @@ pub fn build(dir: PathBuf) -> anyhow::Result<()> {
         hyperlane_local_domain: 88888888,
         hyperlane_ism_validator_sets: btree_map! {},
         warp_routes: btree_map! {},
+        account_factory_minimum_deposit: Coins::default(),
     })?;
 
     for (username, account) in genesis_config.accounts.iter_mut() {
