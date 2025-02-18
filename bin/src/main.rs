@@ -6,7 +6,7 @@ pub mod types;
 
 pub use {ext::*, genesis::*, types::*};
 
-pub const DEFAULT_APP_DIR: &str = ".dagnod";
+pub const DEFAULT_APP_DIR: &str = ".dangod";
 
 #[derive(Parser)]
 #[command(author, version, about, next_display_order = None)]

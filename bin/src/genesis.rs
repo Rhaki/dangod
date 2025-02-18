@@ -193,7 +193,7 @@ pub fn build(dir: PathBuf) -> anyhow::Result<()> {
 }
 
 pub fn reset() -> anyhow::Result<()> {
-    std::fs::remove_file(g_home_dir()?.join(".dagnod/genesis.json"))?;
+    std::fs::remove_file(g_home_dir()?.join(".dangod/genesis.json"))?;
     std::fs::remove_dir_all(g_home_dir()?.join(".cometbft/data"))?;
     std::fs::remove_dir_all(g_home_dir()?.join(".cometbft/config"))?;
     std::fs::remove_dir_all(g_home_dir()?.join(".dango/data"))?;

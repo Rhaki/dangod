@@ -9,6 +9,7 @@
     cd cometbft
     git checkout v0.38.10
     make install
+    make build
     ```
 
 2. Clone and install the [**execution**](https://github.com/left-curve/left-curve) layer:
