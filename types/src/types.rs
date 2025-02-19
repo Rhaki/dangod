@@ -2,7 +2,7 @@ use {
     bip32::{Language, Mnemonic},
     dango_genesis::Contracts,
     dango_types::account_factory::Username,
-    grug::{Addr, Coins, Denom, Duration, Udec128, Uint128},
+    grug::{Addr, Coins, Denom, Duration, Message, Udec128, Uint128},
     rand::rngs::OsRng,
     std::{collections::BTreeMap, str::FromStr},
 };
@@ -15,6 +15,7 @@ pub struct Genesis {
     pub fee_denom_creation: Uint128,
     pub contracts: Option<Contracts>,
     pub max_orphan_age: Duration,
+    pub extra_msgs: Vec<Message>
 }
 
 impl Genesis {

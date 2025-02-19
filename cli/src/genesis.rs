@@ -13,7 +13,8 @@ use {
         STATIC_FEE_RECIPIENT_KEY, STATIC_KEY_1, STATIC_KEY_2, STATIC_OWNER_KEY,
     },
     grug::{
-        btree_map, Coins, Denom, Duration, HashExt, Inner, Json, JsonSerExt, DEFAULT_MAX_ORPHAN_AGE,
+        btree_map, Coins, Denom, Duration, GenesisState, HashExt, Inner, Json, JsonDeExt,
+        JsonSerExt, DEFAULT_MAX_ORPHAN_AGE,
     },
     k256::ecdsa::SigningKey,
     std::{collections::BTreeMap, path::PathBuf, str::FromStr},
@@ -27,6 +28,7 @@ pub fn generate(dir: PathBuf, accounts: BTreeMap<Username, Account>) -> anyhow::
         fee_denom_creation: DENOM_FEE_CREATION,
         contracts: None,
         max_orphan_age: DEFAULT_MAX_ORPHAN_AGE,
+        extra_msgs: vec![],
     };
 
     let path = dir.join(GENESIS_FILE);
@@ -169,6 +171,22 @@ pub fn build(dir: PathBuf) -> anyhow::Result<()> {
     genesis_cometbft["app_state"] = genesis_state.to_json_value()?.into_inner();
 
     genesis_config.write_pretty_json(dir.join(GENESIS_FILE))?;
+
+    genesis_cometbft.write_pretty_json(cometbft_genesis_path()?)?;
+
+    Ok(())
+}
+
+pub fn build_msgs(dir: PathBuf) -> anyhow::Result<()> {
+    let genesis_config: Genesis = dir.join(GENESIS_FILE).read()?;
+    let mut genesis_cometbft: Json = cometbft_genesis_path()?.read()?;
+
+    let mut genesis_state: GenesisState =
+        Json::from_inner(genesis_cometbft["app_state"].clone()).deserialize_json()?;
+
+    genesis_state.msgs.extend(genesis_config.extra_msgs);
+
+    genesis_cometbft["app_state"] = genesis_state.to_json_value()?.into_inner();
 
     genesis_cometbft.write_pretty_json(cometbft_genesis_path()?)?;
 

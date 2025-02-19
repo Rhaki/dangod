@@ -23,6 +23,7 @@ struct Cli {
 #[derive(Parser)]
 enum Command {
     Build,
+    BuildMsgs,
     Generate { counter: usize },
     GenerateStatic,
     Reset,
@@ -55,5 +56,6 @@ async fn main() -> anyhow::Result<()> {
         Command::Generate { counter } => genesis::generate_random(app_dir, counter),
         Command::GenerateStatic => genesis::generate_static(app_dir),
         Command::Reset => genesis::reset(),
+        Command::BuildMsgs => genesis::build_msgs(app_dir),
     }
 }
