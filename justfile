@@ -4,7 +4,7 @@ default:
 
 # Compile and install the Grug node software
 install:
-  cargo install --path bin
+  cargo install --path cli
 
 # Run tests
 test:
