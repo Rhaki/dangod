@@ -16,7 +16,6 @@ clap               = { workspace = true, features = ["derive", "wrap_help"] }
 colored            = { workspace = true }
 colored_json       = { workspace = true }
 dango-genesis      = { workspace = true }
-dango-testing      = { workspace = true }
 dango-types        = { workspace = true }
 dialoguer          = { workspace = true }
 grug               = { workspace = true }

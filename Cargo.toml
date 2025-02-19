@@ -22,7 +22,6 @@ grug               = { git = "https://github.com/left-curve/left-curve", branch 
 grug-client        = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
 dango-client       = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
 dango-genesis      = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
-dango-testing      = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits"}
 dango-types        = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
 hex                = "0.4"
 home               = "0.5"
