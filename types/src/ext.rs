@@ -1,6 +1,5 @@
 use {
     grug::JsonDeExt,
-    home::home_dir,
     serde::de::DeserializeOwned,
     std::{
         path::{Path, PathBuf},
@@ -49,16 +48,4 @@ where
         std::fs::write(path.as_ref(), serde_json::to_string_pretty(&self)?)?;
         Ok(())
     }
-}
-
-pub fn g_home_dir() -> anyhow::Result<PathBuf> {
-    home_dir().ok_or_else(|| anyhow::anyhow!("Failed to find home directory"))
-}
-
-pub fn cometbft_genesis_path() -> anyhow::Result<PathBuf> {
-    Ok(g_home_dir()?.join(".cometbft/config/genesis.json"))
-}
-
-pub fn cometbft_config_path() -> anyhow::Result<PathBuf> {
-    Ok(g_home_dir()?.join(".cometbft/config/config.toml"))
 }

@@ -1,6 +1,6 @@
 use {
     dango_client::SingleSigner,
-    dangod::{STATIC_KEY_1, STATIC_KEY_2},
+    dangod_types::{STATIC_KEY_1, STATIC_KEY_2},
     grug::{
         Addr, Base64Encoder, Client, Coins, Defined, Encoder, Hash256, JsonDeExt, Message,
         SigningClient, TxEvents,

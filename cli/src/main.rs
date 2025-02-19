@@ -1,12 +1,11 @@
-use {clap::Parser, std::path::PathBuf, tracing::level_filters::LevelFilter};
+use {
+    clap::Parser,
+    dangod_types::{home_dir, DANGOD_APP_DIR},
+    std::path::PathBuf,
+    tracing::level_filters::LevelFilter,
+};
 
-pub mod ext;
 pub mod genesis;
-pub mod types;
-
-pub use {ext::*, genesis::*, types::*};
-
-pub const DEFAULT_APP_DIR: &str = ".dangod";
 
 #[derive(Parser)]
 #[command(author, version, about, next_display_order = None)]
@@ -37,7 +36,7 @@ async fn main() -> anyhow::Result<()> {
     let app_dir = if let Some(dir) = cli.home {
         dir
     } else {
-        g_home_dir()?.join(DEFAULT_APP_DIR)
+        home_dir()?.join(DANGOD_APP_DIR)
     };
 
     if !app_dir.exists() {

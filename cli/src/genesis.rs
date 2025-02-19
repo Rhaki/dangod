@@ -1,8 +1,4 @@
 use {
-    crate::{
-        ext::{cometbft_config_path, cometbft_genesis_path, g_home_dir, PathBuffExt, Writer},
-        types::{Account, Genesis},
-    },
     bip32::{Language, Mnemonic, PrivateKey, PublicKey, XPrv},
     dango_genesis::{build_genesis, GenesisConfig, GenesisUser},
     dango_types::{
@@ -11,30 +7,17 @@ use {
         constants::{GUARDIAN_SETS, PYTH_PRICE_SOURCES},
         taxman,
     },
+    dangod_types::{
+        cometbft_config_path, cometbft_genesis_path, home_dir, Account, Genesis, PathBuffExt,
+        Writer, DEFAULT_COINS, DENOM_FEE_CREATION, FEE_DENOM, FEE_RATE, GENESIS_FILE,
+        STATIC_FEE_RECIPIENT_KEY, STATIC_KEY_1, STATIC_KEY_2, STATIC_OWNER_KEY,
+    },
     grug::{
-        btree_map, Coins, Denom, Duration, HashExt, Inner, Json, JsonSerExt, NumberConst, Udec128,
-        Uint128,
+        btree_map, Coins, Denom, Duration, HashExt, Inner, Json, JsonSerExt, DEFAULT_MAX_ORPHAN_AGE,
     },
     k256::ecdsa::SigningKey,
-    std::{collections::BTreeMap, path::PathBuf, str::FromStr, sync::LazyLock},
+    std::{collections::BTreeMap, path::PathBuf, str::FromStr},
 };
-
-pub const STATIC_OWNER_KEY: &str = "junior fault athlete legal inject duty board school anger mesh humor file desk element ticket shop engine paper question love castle ghost bring discover";
-pub const STATIC_FEE_RECIPIENT_KEY: &str = "believe share juice host giraffe photo silent equip drift upset seed abstract border stage funny fabric rate boring power village tower north sniff potato";
-pub const STATIC_KEY_1: &str = "impulse youth electric wink tomorrow fruit squirrel practice effort mimic leave year visual calm surge system census tower involve wild symbol coral purchase uniform";
-pub const STATIC_KEY_2: &str = "visit spend fatigue fork acid junk prize monitor bonus gym frog educate blouse mountain beyond loop nominee argue car shield mixed chunk current force";
-
-const GENESIS_FILE: &str = "genesis.json";
-const DEFAULT_COINS: LazyLock<Coins> = LazyLock::new(|| {
-    Coins::try_from(btree_map! {
-        "udng" => 100_000_000,
-    })
-    .unwrap()
-});
-const FEE_DENOM: &str = "udng";
-const FEE_RATE: Udec128 = Udec128::ZERO;
-const DENOM_FEE_CREATION: Uint128 = Uint128::new(1);
-const DEFAULT_MAX_ORPHAN_AGE: Duration = Duration::from_seconds(7 * 24 * 60 * 60);
 
 pub fn generate(dir: PathBuf, accounts: BTreeMap<Username, Account>) -> anyhow::Result<()> {
     let genesis = Genesis {
@@ -193,10 +176,10 @@ pub fn build(dir: PathBuf) -> anyhow::Result<()> {
 }
 
 pub fn reset() -> anyhow::Result<()> {
-    std::fs::remove_file(g_home_dir()?.join(".dangod/genesis.json"))?;
-    std::fs::remove_dir_all(g_home_dir()?.join(".cometbft/data"))?;
-    std::fs::remove_dir_all(g_home_dir()?.join(".cometbft/config"))?;
-    std::fs::remove_dir_all(g_home_dir()?.join(".dango/data"))?;
+    std::fs::remove_file(home_dir()?.join(".dangod/genesis.json"))?;
+    std::fs::remove_dir_all(home_dir()?.join(".cometbft/data"))?;
+    std::fs::remove_dir_all(home_dir()?.join(".cometbft/config"))?;
+    std::fs::remove_dir_all(home_dir()?.join(".dango/data"))?;
 
     Ok(())
 }
