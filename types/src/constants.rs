@@ -1,4 +1,5 @@
 use {
+    dango_types::constants::DANGO_DENOM,
     grug::{btree_map, Coins, NumberConst, Udec128, Uint128},
     std::sync::LazyLock,
 };
@@ -13,11 +14,10 @@ pub const STATIC_KEY_2: &str = "visit spend fatigue fork acid junk prize monitor
 pub const GENESIS_FILE: &str = "genesis.json";
 pub const DEFAULT_COINS: LazyLock<Coins> = LazyLock::new(|| {
     Coins::try_from(btree_map! {
-        "udng" => 100_000_000,
+        DANGO_DENOM.clone() => 100_000_000,
     })
     .unwrap()
 });
-pub const FEE_DENOM: &str = "udng";
 pub const FEE_RATE: Udec128 = Udec128::ZERO;
 pub const DENOM_FEE_CREATION: Uint128 = Uint128::new(1);
 

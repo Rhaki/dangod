@@ -4,17 +4,17 @@ use {
     dango_types::{
         account_factory::Username,
         auth::Key,
-        constants::{GUARDIAN_SETS, PYTH_PRICE_SOURCES},
+        constants::{DANGO_DENOM, GUARDIAN_SETS, PYTH_PRICE_SOURCES},
         taxman,
     },
     dangod_types::{
         cometbft_config_path, cometbft_genesis_path, home_dir, Account, Genesis, PathBuffExt,
-        Writer, DEFAULT_COINS, DENOM_FEE_CREATION, FEE_DENOM, FEE_RATE, GENESIS_FILE,
+        Writer, DEFAULT_COINS, DENOM_FEE_CREATION, FEE_RATE, GENESIS_FILE,
         STATIC_FEE_RECIPIENT_KEY, STATIC_KEY_1, STATIC_KEY_2, STATIC_OWNER_KEY,
     },
     grug::{
-        btree_map, Coins, Denom, Duration, GenesisState, HashExt, Inner, Json, JsonDeExt,
-        JsonSerExt, DEFAULT_MAX_ORPHAN_AGE,
+        btree_map, Coins, Duration, GenesisState, HashExt, Inner, Json, JsonDeExt, JsonSerExt,
+        DEFAULT_MAX_ORPHAN_AGE,
     },
     k256::ecdsa::SigningKey,
     std::{collections::BTreeMap, path::PathBuf, str::FromStr},
@@ -24,7 +24,7 @@ pub fn generate(dir: PathBuf, accounts: BTreeMap<Username, Account>) -> anyhow::
     let genesis = Genesis {
         accounts,
         fee_rate: FEE_RATE,
-        fee_denom: Denom::from_str(FEE_DENOM)?,
+        fee_denom: DANGO_DENOM.clone(),
         fee_denom_creation: DENOM_FEE_CREATION,
         contracts: None,
         max_orphan_age: DEFAULT_MAX_ORPHAN_AGE,
