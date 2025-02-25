@@ -1,75 +1,67 @@
-FROM rust:alpine
+FROM rust:1.85.0-slim
 
-# Target platform the image is being built for.
-# Must be either `linux/amd64` or `linux/arm64`.
+# Target platform: must be linux/amd64 or linux/arm64.
 ARG TARGETPLATFORM
 
-# Version of CometBFT.
-ARG COMETBFT_VERSION="0.38.12"
-
-# Version of left-curve monorepo with which we will build grug CLI.
+# Component versions.
+ARG COMETBFT_VERSION="0.38.17"
 ARG LEFT_CURVE_GIT_COMMIT="d8881b5"
-
-# Version of left-curve monorepo with which we will build grug CLI.
 ARG DANGOD_GIT_COMMIT="55935c3"
 
-# Download the crates.io index using the new sparse protocol to improve
-# performance and avoid OOM in the build. See:
-# https://doc.rust-lang.org/cargo/reference/config.html#registriescrates-ioprotocol
+# Use the sparse protocol for downloading the crates.io index.
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # Install build dependencies.
-#
-# musl-dev provides crti.o
-# clang-dev and llvm-dev both provide libclang.so, located respectively at:
-# - /usr/lib/libclang.so
-# - /usr/lib/llvm17/lib/libclang.so
-# Can use a specific one by setting the LIBCLANG_PATH environment variable.
-# But this isn't necessary here.
-RUN apk update && apk add --no-cache clang clang-dev g++ git llvm-dev musl-dev curl openssl-dev pkgconf
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    wget \
+    libclang-dev \
+    g++ \
+    pkg-config \
+    libssl-dev \
+  && rm -rf /var/lib/apt/lists/*
 
+# Download and install the pre-built CometBFT binary.
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-  curl -L -o cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_amd64.tar.gz; \
-  elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-  curl -L -o cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_arm64.tar.gz; \
-  else \
-  echo "unsupported architecture: $TARGETPLATFORM" && exit 1; \
-  fi \
-  && tar -xvf cometbft.tar.gz -C /usr/local/bin cometbft \
-  && rm cometbft.tar.gz \
-  && cometbft version
+      wget -q -O cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_amd64.tar.gz; \
+    elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+      wget -q -O cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_arm64.tar.gz; \
+    else \
+      echo "unsupported architecture: $TARGETPLATFORM" && exit 1; \
+    fi \
+    && tar -xvf cometbft.tar.gz -C /usr/local/bin cometbft \
+    && rm cometbft.tar.gz \
+    && cometbft version
 
-# Download dango source code.
+# Download the dango source code (part of left-curve).
 RUN git clone https://github.com/left-curve/left-curve.git \
-  && cd left-curve \
-  && git checkout $LEFT_CURVE_GIT_COMMIT
+    && cd left-curve \
+    && git checkout $LEFT_CURVE_GIT_COMMIT
 
-# Compile dango.
+# Compile dango (CLI to manage the blockchain).
 RUN cd left-curve \
-  && RUSTFLAGS='-C link-arg=-s -C target-feature=-crt-static' cargo install --path dango/cli \
-  && dango --version
+    && cargo install --path dango/cli \
+    && dango --version
 
- # Download dangod source code.
+# Download the dangod source code (CLI to generate the genesis, etc.)
 RUN git clone https://github.com/Rhaki/dangod.git \
-  && cd dangod \
-  && git checkout $DANGOD_GIT_COMMIT
+    && cd dangod \
+    && git checkout $DANGOD_GIT_COMMIT
 
 # Compile dangod.
 RUN cd dangod \
-  && cargo install --path cli \
-  && dangod --version
+    && cargo install --path cli \
+    && dangod --version
 
-# Delete the left-curve repo.
-RUN rm -rf left-curve
+# Remove source directories to free up space.
+RUN rm -rf left-curve dangod
 
-# Delete the dangod repo.
-RUN rm -rf dangod
-
-# Aggiungi lo script entrypoint
+# Add the entrypoint script and ensure it is executable.
 ADD entrypoint.sh /root/entrypoint.sh
 RUN chmod +x /root/entrypoint.sh
 
-# Espone le porte fisse
+# Expose fixed ports
 EXPOSE 26656 26657
 
-ENTRYPOINT ["/bin/ash", "/root/entrypoint.sh"]
+# Set the entrypoint script using bash
+ENTRYPOINT ["/bin/bash", "/root/entrypoint.sh"]
