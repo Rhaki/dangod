@@ -18,9 +18,6 @@ ARG DANGOD_GIT_COMMIT="55935c3"
 # https://doc.rust-lang.org/cargo/reference/config.html#registriescrates-ioprotocol
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
-# ENV CLANG_STATIC=0
-
-
 # Install build dependencies.
 #
 # musl-dev provides crti.o
