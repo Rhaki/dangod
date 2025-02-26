@@ -22,9 +22,14 @@ struct Cli {
 
 #[derive(Parser)]
 enum Command {
-    Build,
+    Build {
+        #[arg(long)]
+        docker: bool,
+    },
     BuildMsgs,
-    Generate { counter: usize },
+    Generate {
+        counter: usize,
+    },
     GenerateStatic,
     Reset,
     Start,
@@ -52,7 +57,7 @@ async fn main() -> anyhow::Result<()> {
             std::process::Command::new("dango").arg("start").status()?;
             Ok(())
         }
-        Command::Build => genesis::build(app_dir),
+        Command::Build {docker} => genesis::build(app_dir, docker),
         Command::Generate { counter } => genesis::generate_random(app_dir, counter),
         Command::GenerateStatic => genesis::generate_static(app_dir),
         Command::Reset => genesis::reset(),

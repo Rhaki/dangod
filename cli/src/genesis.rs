@@ -92,7 +92,7 @@ pub fn generate_static(dir: PathBuf) -> anyhow::Result<()> {
     generate(dir, accounts)
 }
 
-pub fn build(dir: PathBuf) -> anyhow::Result<()> {
+pub fn build(dir: PathBuf, docker: bool) -> anyhow::Result<()> {
     let mut genesis_config: Genesis = dir.join(GENESIS_FILE).read()?;
     let mut genesis_cometbft: Json = match cometbft_genesis_path()?.read() {
         Ok(val) => val,
@@ -106,10 +106,17 @@ pub fn build(dir: PathBuf) -> anyhow::Result<()> {
     };
 
     // Change CORS on cometbft config.toml
-    let config: String = cometbft_config_path()?.read_string::<String>()?.replace(
+    let mut config: String = cometbft_config_path()?.read_string::<String>()?.replace(
         "cors_allowed_origins = []",
         "cors_allowed_origins = [\"*\"]",
     );
+
+    if docker {
+        config = config.replace(
+            "laddr = \"tcp://127.0.0.1:26657\"",
+            "laddr = \"tcp://0.0.0.0:26657\"",
+        )
+    }
 
     std::fs::write(cometbft_config_path()?, config)?;
 
