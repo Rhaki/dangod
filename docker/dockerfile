@@ -6,7 +6,7 @@ ARG TARGETPLATFORM
 # Component versions.
 ARG COMETBFT_VERSION="0.38.17"
 ARG LEFT_CURVE_GIT_COMMIT="d8881b5"
-ARG DANGOD_GIT_COMMIT="874ca96"
+ARG DANGOD_GIT_COMMIT="e2af113"
 
 # Use the sparse protocol for downloading the crates.io index.
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
@@ -40,7 +40,7 @@ RUN git clone https://github.com/left-curve/left-curve.git \
 
 # Compile dango (CLI to manage the blockchain).
 RUN cd left-curve \
-    && cargo install --path dango/cli \
+    && cargo install --path dango/cli --locked \
     && dango --version
 
 # Download the dangod source code (CLI to generate the genesis, etc.)
@@ -50,7 +50,7 @@ RUN git clone https://github.com/Rhaki/dangod.git \
 
 # Compile dangod.
 RUN cd dangod \
-    && cargo install --path cli \
+    && cargo install --path cli --locked \
     && dangod --version
 
 # Remove source directories to free up space.
