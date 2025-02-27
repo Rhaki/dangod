@@ -92,7 +92,7 @@ pub fn generate_static(dir: PathBuf) -> anyhow::Result<()> {
     generate(dir, accounts)
 }
 
-pub fn build(dir: PathBuf, docker: bool) -> anyhow::Result<()> {
+pub fn build(dir: PathBuf, docker: bool, hyperlane_domain: u32) -> anyhow::Result<()> {
     let mut genesis_config: Genesis = dir.join(GENESIS_FILE).read()?;
     let mut genesis_cometbft: Json = match cometbft_genesis_path()?.read() {
         Ok(val) => val,
@@ -161,7 +161,7 @@ pub fn build(dir: PathBuf, docker: bool) -> anyhow::Result<()> {
         unlocking_cliff: Duration::from_weeks(4 * 9),
         unlocking_period: Duration::from_weeks(4 * 27),
         wormhole_guardian_sets: GUARDIAN_SETS.clone(),
-        hyperlane_local_domain: 88888888,
+        hyperlane_local_domain: hyperlane_domain,
         hyperlane_ism_validator_sets: btree_map! {},
         warp_routes: btree_map! {},
         account_factory_minimum_deposit: Coins::default(),

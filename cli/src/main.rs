@@ -25,6 +25,8 @@ enum Command {
     Build {
         #[arg(long)]
         docker: bool,
+        #[arg(long, default_value = "88888888")]
+        hyperlane_domain: u32,
     },
     BuildMsgs,
     Generate {
@@ -57,7 +59,10 @@ async fn main() -> anyhow::Result<()> {
             std::process::Command::new("dango").arg("start").status()?;
             Ok(())
         }
-        Command::Build {docker} => genesis::build(app_dir, docker),
+        Command::Build {
+            docker,
+            hyperlane_domain,
+        } => genesis::build(app_dir, docker, hyperlane_domain),
         Command::Generate { counter } => genesis::generate_random(app_dir, counter),
         Command::GenerateStatic => genesis::generate_static(app_dir),
         Command::Reset => genesis::reset(),
