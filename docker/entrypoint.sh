@@ -7,7 +7,7 @@ HYPERLANE_DOMAIN=""
 while [[ $# -gt 0 ]]; do
     case "$1" in
     --hyperlane_domain)
-        HYPERLANE_DOMAIN="--hyperlane_domain $2"
+        HYPERLANE_DOMAIN="--hyperlane-domain $2"
         shift 2
         ;;
     *)
