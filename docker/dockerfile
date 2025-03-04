@@ -4,54 +4,59 @@ FROM rust:1.85.0-slim
 ARG TARGETPLATFORM
 
 # Component versions.
-ARG COMETBFT_VERSION="0.38.17"
-ARG LEFT_CURVE_GIT_COMMIT="115df1d"
-ARG DANGOD_GIT_COMMIT="38793d6"
+
 
 # Use the sparse protocol for downloading the crates.io index.
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # Install build dependencies.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    wget \
-    libclang-dev \
-    g++ \
-    pkg-config \
-    libssl-dev \
+  git \
+  wget \
+  libclang-dev \
+  g++ \
+  pkg-config \
+  libssl-dev \
   && rm -rf /var/lib/apt/lists/*
+
+ARG COMETBFT_VERSION="0.38.17"
+
 
 # Download and install the pre-built CometBFT binary.
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
-      wget -q -O cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_amd64.tar.gz; \
-    elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
-      wget -q -O cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_arm64.tar.gz; \
-    else \
-      echo "unsupported architecture: $TARGETPLATFORM" && exit 1; \
-    fi \
-    && tar -xvf cometbft.tar.gz -C /usr/local/bin cometbft \
-    && rm cometbft.tar.gz \
-    && cometbft version
+  wget -q -O cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_amd64.tar.gz; \
+  elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then \
+  wget -q -O cometbft.tar.gz https://github.com/cometbft/cometbft/releases/download/v${COMETBFT_VERSION}/cometbft_${COMETBFT_VERSION}_linux_arm64.tar.gz; \
+  else \
+  echo "unsupported architecture: $TARGETPLATFORM" && exit 1; \
+  fi \
+  && tar -xvf cometbft.tar.gz -C /usr/local/bin cometbft \
+  && rm cometbft.tar.gz \
+  && cometbft version
+
+ARG LEFT_CURVE_GIT_COMMIT="115df1d"
 
 # Download the dango source code (part of left-curve).
 RUN git clone https://github.com/left-curve/left-curve.git \
-    && cd left-curve \
-    && git checkout $LEFT_CURVE_GIT_COMMIT
+  && cd left-curve \
+  && git checkout $LEFT_CURVE_GIT_COMMIT
 
 # Compile dango (CLI to manage the blockchain).
 RUN cd left-curve \
-    && cargo install --path dango/cli --locked \
-    && dango --version
+  && cargo install --path dango/cli --locked \
+  && dango --version
+
+ARG DANGOD_GIT_COMMIT="15164e7"
 
 # Download the dangod source code (CLI to generate the genesis, etc.)
 RUN git clone https://github.com/Rhaki/dangod.git \
-    && cd dangod \
-    && git checkout $DANGOD_GIT_COMMIT
+  && cd dangod \
+  && git checkout $DANGOD_GIT_COMMIT
 
 # Compile dangod.
 RUN cd dangod \
-    && cargo install --path cli --locked \
-    && dangod --version
+  && cargo install --path cli --locked \
+  && dangod --version
 
 # Remove source directories to free up space.
 RUN rm -rf left-curve dangod
