@@ -5,7 +5,7 @@ ARG TARGETPLATFORM
 
 # Component versions.
 ARG COMETBFT_VERSION="0.38.17"
-ARG LEFT_CURVE_GIT_COMMIT="d8881b5"
+ARG LEFT_CURVE_GIT_COMMIT="115df1d"
 ARG DANGOD_GIT_COMMIT="63c8dab"
 
 # Use the sparse protocol for downloading the crates.io index.

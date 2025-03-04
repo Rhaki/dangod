@@ -12,12 +12,12 @@ version      = "0.0.0"
 anyhow             = "1"
 bip32              = "0.5"
 clap               = "4"
-dango-client       = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
-dango-genesis      = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
-dango-types        = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
+dango-client       = { git = "https://github.com/left-curve/left-curve" }
+dango-genesis      = { git = "https://github.com/left-curve/left-curve" }
+dango-types        = { git = "https://github.com/left-curve/left-curve" }
 dangod-types       = { path = "types" }
-grug               = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
-grug-client        = { git = "https://github.com/left-curve/left-curve", branch = "grug/client_traits" }
+grug               = { git = "https://github.com/left-curve/left-curve" }
+grug-client        = { git = "https://github.com/left-curve/left-curve" }
 hex                = "0.4"
 home               = "0.5"
 k256               = "0.13"
