@@ -9,11 +9,11 @@ use {
     },
     dangod_types::{
         cometbft_config_path, cometbft_genesis_path, home_dir, Account, Genesis, PathBuffExt,
-        Writer, DEFAULT_COINS, DENOM_FEE_CREATION, FEE_RATE, GENESIS_FILE,
-        STATIC_FEE_RECIPIENT_KEY, STATIC_KEY_1, STATIC_KEY_2, STATIC_OWNER_KEY,
+        Writer, ACCOUNT_FACTORY_MINIMUM_DEPOSITS, DEFAULT_COINS, DENOM_FEE_CREATION, FEE_RATE,
+        GENESIS_FILE, STATIC_FEE_RECIPIENT_KEY, STATIC_KEY_1, STATIC_KEY_2, STATIC_OWNER_KEY,
     },
     grug::{
-        btree_map, Coins, Duration, GenesisState, HashExt, Inner, Json, JsonDeExt, JsonSerExt,
+        btree_map, Duration, GenesisState, HashExt, Inner, Json, JsonDeExt, JsonSerExt,
         DEFAULT_MAX_ORPHAN_AGE,
     },
     k256::ecdsa::SigningKey,
@@ -164,7 +164,7 @@ pub fn build(dir: PathBuf, docker: bool, hyperlane_domain: u32) -> anyhow::Resul
         hyperlane_local_domain: hyperlane_domain,
         hyperlane_ism_validator_sets: btree_map! {},
         warp_routes: btree_map! {},
-        account_factory_minimum_deposit: Coins::default(),
+        account_factory_minimum_deposit: ACCOUNT_FACTORY_MINIMUM_DEPOSITS.clone(),
     })?;
 
     for (username, account) in genesis_config.accounts.iter_mut() {

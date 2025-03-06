@@ -34,7 +34,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
   && rm cometbft.tar.gz \
   && cometbft version
 
-ARG LEFT_CURVE_GIT_COMMIT="115df1d"
+ARG LEFT_CURVE_GIT_COMMIT="a291fa2"
 
 # Download the dango source code (part of left-curve).
 RUN git clone https://github.com/left-curve/left-curve.git \

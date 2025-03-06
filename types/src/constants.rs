@@ -1,7 +1,7 @@
 use {
     dango_types::constants::DANGO_DENOM,
-    grug::{btree_map, Coins, NumberConst, Udec128, Uint128},
-    std::sync::LazyLock,
+    grug::{btree_map, Coins, Denom, NumberConst, Udec128, Uint128},
+    std::{str::FromStr, sync::LazyLock},
 };
 
 pub const DANGOD_APP_DIR: &str = ".dangod";
@@ -20,5 +20,12 @@ pub const DEFAULT_COINS: LazyLock<Coins> = LazyLock::new(|| {
 });
 pub const FEE_RATE: Udec128 = Udec128::ZERO;
 pub const DENOM_FEE_CREATION: Uint128 = Uint128::new(1);
+pub const ACCOUNT_FACTORY_MINIMUM_DEPOSITS: LazyLock<Coins> = LazyLock::new(|| {
+    Coins::try_from(btree_map! {
+        Denom::from_str("hyp/dango1/dng").unwrap() => 100,
+        Denom::from_str("hyp/dango2/dng").unwrap() => 100,
+    })
+    .unwrap()
+});
 
 pub use grug::DEFAULT_MAX_ORPHAN_AGE;
