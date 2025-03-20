@@ -18,6 +18,7 @@ dango-types        = { git = "https://github.com/left-curve/left-curve" }
 dangod-types       = { path = "types" }
 grug               = { git = "https://github.com/left-curve/left-curve" }
 grug-client        = { git = "https://github.com/left-curve/left-curve" }
+grug-pyth-types    = { git = "https://github.com/left-curve/left-curve", package = "pyth-types" }
 hex                = "0.4"
 home               = "0.5"
 k256               = "0.13"
