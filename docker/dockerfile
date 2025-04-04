@@ -34,7 +34,7 @@ RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
   && rm cometbft.tar.gz \
   && cometbft version
 
-ARG LEFT_CURVE_GIT_COMMIT="a291fa2"
+ARG LEFT_CURVE_GIT_COMMIT="c3e91a2"
 
 # Download the dango source code (part of left-curve).
 RUN git clone https://github.com/left-curve/left-curve.git \
@@ -46,7 +46,7 @@ RUN cd left-curve \
   && cargo install --path dango/cli --locked \
   && dango --version
 
-ARG DANGOD_GIT_COMMIT="15164e7"
+ARG DANGOD_GIT_COMMIT="7499044"
 
 # Download the dangod source code (CLI to generate the genesis, etc.)
 RUN git clone https://github.com/Rhaki/dangod.git \
@@ -67,6 +67,9 @@ RUN chmod +x /root/entrypoint.sh
 
 # Expose fixed ports
 EXPOSE 26656 26657
+
+RUN mkdir -p /root/.dango/config
+COPY app.toml /root/.dango/config/app.toml
 
 # Set the entrypoint script using bash
 ENTRYPOINT ["/bin/bash", "/root/entrypoint.sh"]
