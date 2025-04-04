@@ -1,6 +1,6 @@
 use {
     dango_types::constants::DANGO_DENOM,
-    grug::{btree_map, Coins, Denom, NumberConst, Udec128, Uint128},
+    grug::{btree_map, Coin, Coins, Denom, NumberConst, Udec128, Uint128},
     std::{str::FromStr, sync::LazyLock},
 };
 
@@ -27,5 +27,7 @@ pub const ACCOUNT_FACTORY_MINIMUM_DEPOSITS: LazyLock<Coins> = LazyLock::new(|| {
     })
     .unwrap()
 });
+pub const VA_FEE_PER_BYTE: LazyLock<Coin> =
+    LazyLock::new(|| Coin::new(DANGO_DENOM.clone(), 100).unwrap());
 
 pub use grug::DEFAULT_MAX_ORPHAN_AGE;

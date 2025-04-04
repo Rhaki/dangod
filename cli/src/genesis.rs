@@ -4,18 +4,20 @@ use {
     dango_types::{
         account_factory::Username,
         auth::Key,
-        constants::{DANGO_DENOM, GUARDIAN_SETS, PYTH_PRICE_SOURCES},
+        constants::{DANGO_DENOM, PYTH_PRICE_SOURCES},
         taxman,
     },
     dangod_types::{
         cometbft_config_path, cometbft_genesis_path, home_dir, Account, Genesis, PathBuffExt,
         Writer, ACCOUNT_FACTORY_MINIMUM_DEPOSITS, DEFAULT_COINS, DENOM_FEE_CREATION, FEE_RATE,
         GENESIS_FILE, STATIC_FEE_RECIPIENT_KEY, STATIC_KEY_1, STATIC_KEY_2, STATIC_OWNER_KEY,
+        VA_FEE_PER_BYTE,
     },
     grug::{
         btree_map, Duration, GenesisState, HashExt, Inner, Json, JsonDeExt, JsonSerExt,
         DEFAULT_MAX_ORPHAN_AGE,
     },
+    grug_pyth_types::GUARDIAN_SETS,
     k256::ecdsa::SigningKey,
     std::{collections::BTreeMap, path::PathBuf, str::FromStr},
 };
@@ -165,6 +167,7 @@ pub fn build(dir: PathBuf, docker: bool, hyperlane_domain: u32) -> anyhow::Resul
         hyperlane_ism_validator_sets: btree_map! {},
         warp_routes: btree_map! {},
         account_factory_minimum_deposit: ACCOUNT_FACTORY_MINIMUM_DEPOSITS.clone(),
+        hyperlane_va_announce_fee_per_byte: VA_FEE_PER_BYTE.clone(),
     })?;
 
     for (username, account) in genesis_config.accounts.iter_mut() {

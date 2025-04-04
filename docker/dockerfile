@@ -3,9 +3,6 @@ FROM rust:1.85.0-slim
 # Target platform: must be linux/amd64 or linux/arm64.
 ARG TARGETPLATFORM
 
-# Component versions.
-
-
 # Use the sparse protocol for downloading the crates.io index.
 ENV CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
@@ -20,7 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   && rm -rf /var/lib/apt/lists/*
 
 ARG COMETBFT_VERSION="0.38.17"
-
 
 # Download and install the pre-built CometBFT binary.
 RUN if [ "$TARGETPLATFORM" = "linux/amd64" ]; then \
@@ -46,7 +42,7 @@ RUN cd left-curve \
   && cargo install --path dango/cli --locked \
   && dango --version
 
-ARG DANGOD_GIT_COMMIT="7499044"
+ARG DANGOD_GIT_COMMIT="61b71ef"
 
 # Download the dangod source code (CLI to generate the genesis, etc.)
 RUN git clone https://github.com/Rhaki/dangod.git \

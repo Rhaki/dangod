@@ -18,6 +18,7 @@ dango-types        = { workspace = true }
 dangod-types       = { workspace = true }
 grug               = { workspace = true }
 grug-client        = { workspace = true }
+grug-pyth-types    = { workspace = true }
 hex                = { workspace = true }
 home               = { workspace = true }
 k256               = { workspace = true }
