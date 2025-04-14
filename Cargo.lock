@@ -1947,7 +1947,7 @@ dependencies = [
 [[package]]
 name = "dango-account-factory"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-auth",
@@ -1958,7 +1958,7 @@ dependencies = [
 [[package]]
 name = "dango-account-margin"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-auth",
@@ -1971,7 +1971,7 @@ dependencies = [
 [[package]]
 name = "dango-account-multi"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-account-factory",
@@ -1983,7 +1983,7 @@ dependencies = [
 [[package]]
 name = "dango-account-spot"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-auth",
@@ -1994,7 +1994,7 @@ dependencies = [
 [[package]]
 name = "dango-auth"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "alloy",
  "anyhow",
@@ -2009,7 +2009,7 @@ dependencies = [
 [[package]]
 name = "dango-bank"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2019,7 +2019,7 @@ dependencies = [
 [[package]]
 name = "dango-client"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "aes-gcm",
  "anyhow",
@@ -2036,7 +2036,7 @@ dependencies = [
 [[package]]
 name = "dango-dex"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2046,7 +2046,7 @@ dependencies = [
 [[package]]
 name = "dango-genesis"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-account-factory",
@@ -2073,7 +2073,7 @@ dependencies = [
 [[package]]
 name = "dango-lending"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-account-factory",
@@ -2084,7 +2084,7 @@ dependencies = [
 [[package]]
 name = "dango-oracle"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-lending",
@@ -2096,7 +2096,7 @@ dependencies = [
 [[package]]
 name = "dango-taxman"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2106,7 +2106,7 @@ dependencies = [
 [[package]]
 name = "dango-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "borsh 1.5.7",
@@ -2124,7 +2124,7 @@ dependencies = [
 [[package]]
 name = "dango-vesting"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2134,7 +2134,7 @@ dependencies = [
 [[package]]
 name = "dango-warp"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2155,6 +2155,7 @@ dependencies = [
  "dangod-types",
  "grug",
  "grug-client",
+ "grug-types",
  "hex",
  "home",
  "k256",
@@ -2809,7 +2810,7 @@ dependencies = [
 [[package]]
 name = "grug"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "borsh 1.5.7",
  "grug-client",
@@ -2827,7 +2828,7 @@ dependencies = [
 [[package]]
 name = "grug-app"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "borsh 1.5.7",
  "chrono",
@@ -2846,9 +2847,10 @@ dependencies = [
 [[package]]
 name = "grug-client"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
+ "async-trait",
  "grug-jmt",
  "grug-math",
  "grug-types",
@@ -2860,7 +2862,7 @@ dependencies = [
 [[package]]
 name = "grug-crypto"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "blake2",
  "blake3",
@@ -2877,7 +2879,7 @@ dependencies = [
 [[package]]
 name = "grug-db-memory"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "grug-app",
  "grug-jmt",
@@ -2888,7 +2890,7 @@ dependencies = [
 [[package]]
 name = "grug-ffi"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "borsh 1.5.7",
  "grug-types",
@@ -2898,7 +2900,7 @@ dependencies = [
 [[package]]
 name = "grug-jmt"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "borsh 1.5.7",
  "grug-math",
@@ -2911,7 +2913,7 @@ dependencies = [
 [[package]]
 name = "grug-macros"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2921,7 +2923,7 @@ dependencies = [
 [[package]]
 name = "grug-math"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "bnum",
  "borsh 1.5.7",
@@ -2933,7 +2935,7 @@ dependencies = [
 [[package]]
 name = "grug-mock-account"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug-ffi",
@@ -2946,7 +2948,7 @@ dependencies = [
 [[package]]
 name = "grug-mock-bank"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug-ffi",
@@ -2959,7 +2961,7 @@ dependencies = [
 [[package]]
 name = "grug-mock-taxman"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "borsh 1.5.7",
@@ -2974,7 +2976,7 @@ dependencies = [
 [[package]]
 name = "grug-storage"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "bnum",
  "borsh 1.5.7",
@@ -2987,7 +2989,7 @@ dependencies = [
 [[package]]
 name = "grug-testing"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug-app",
@@ -3010,8 +3012,9 @@ dependencies = [
 [[package]]
 name = "grug-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
+ "async-trait",
  "bnum",
  "borsh 1.5.7",
  "data-encoding",
@@ -3030,13 +3033,15 @@ dependencies = [
  "sha3",
  "strum",
  "strum_macros",
+ "tendermint",
+ "tendermint-rpc",
  "thiserror 2.0.12",
 ]
 
 [[package]]
 name = "grug-vm-rust"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "elsa",
  "grug-app",
@@ -3380,7 +3385,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-ism"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug",
@@ -3390,7 +3395,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-mailbox"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug",
@@ -3400,7 +3405,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug",
@@ -3410,7 +3415,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-va"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "grug",
@@ -4529,7 +4534,7 @@ dependencies = [
 [[package]]
 name = "pyth-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#d51b47eb1d9819f1c564af400d0b177df0e8389e"
+source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
 dependencies = [
  "anyhow",
  "byteorder",

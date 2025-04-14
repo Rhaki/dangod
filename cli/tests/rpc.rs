@@ -2,9 +2,11 @@ use {
     dango_client::SingleSigner,
     dangod_types::{STATIC_KEY_1, STATIC_KEY_2},
     grug::{
-        Addr, Base64Encoder, Client, Coins, Defined, Encoder, Hash256, JsonDeExt, Message,
-        SigningClient, TxEvents,
+        Addr, Base64Encoder, BroadcastClientExt, Coins, Defined, Encoder, Hash256, JsonDeExt,
+        Message, TxEvents,
     },
+    grug_client::TendermintRpcClient,
+    grug_types::{BlockClient, QueryClient, SearchTxClient},
     std::str::FromStr,
 };
 
@@ -15,7 +17,7 @@ type Account = SingleSigner<Defined<u32>>;
 #[tokio::test]
 async fn works() {
     let client = client().await.unwrap();
-    let block = client.query_block_result(None).await.unwrap();
+    let block = client.query_block_outcome(None).await.unwrap();
     println!("{:?}", block);
 }
 
@@ -41,6 +43,8 @@ async fn transfer() {
     .await
     .unwrap();
 
+    let chain_id = chain_id().await.unwrap();
+
     let response = client
         .send_message(
             &mut account_1,
@@ -49,12 +53,13 @@ async fn transfer() {
                 scale: 1.2,
                 flat_increase: 1_000_000,
             },
+            &chain_id,
         )
         .await
         .unwrap();
 
-    println!("response: {:?}", response);
-    println!("hash: {}", response.hash);
+    println!("response: {:?}", response.check_tx);
+    println!("hash: {}", response.tx_hash);
 }
 
 #[tokio::test]
@@ -64,28 +69,24 @@ async fn search_tx() {
     let client = client().await.unwrap();
 
     let tx = client
-        .query_tx(Hash256::from_str(tx_hash).unwrap())
+        .search_tx(Hash256::from_str(tx_hash).unwrap())
         .await
         .unwrap();
 
-    let decoded_bytes = Base64Encoder::ENCODING.decode(&tx.tx_result.data).unwrap();
-    let events = decoded_bytes.deserialize_json::<TxEvents>().unwrap();
-
-    println!("e: {:?}", events);
+    println!("e: {:?}", tx.outcome.events);
 }
 
 async fn chain_id() -> anyhow::Result<String> {
-    let client = Client::connect(LOCALHOST_RPC)?;
-    Ok(client.query_status().await?.node_info.network.to_string())
+    let client = TendermintRpcClient::new(LOCALHOST_RPC)?;
+    Ok(client.status().await?.node_info.network.to_string())
 }
 
-async fn client() -> anyhow::Result<SigningClient> {
-    let chain_id = chain_id().await?;
-    Ok(SigningClient::connect(chain_id, LOCALHOST_RPC)?)
+async fn client() -> anyhow::Result<TendermintRpcClient> {
+    Ok(TendermintRpcClient::new(LOCALHOST_RPC)?)
 }
 
 async fn create_account(
-    client: &Client,
+    client: &TendermintRpcClient,
     mnemonic: &str,
     addr: &str,
     username: &str,
