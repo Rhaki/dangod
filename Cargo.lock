@@ -1947,7 +1947,7 @@ dependencies = [
 [[package]]
 name = "dango-account-factory"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-auth",
@@ -1958,7 +1958,7 @@ dependencies = [
 [[package]]
 name = "dango-account-margin"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-auth",
@@ -1971,7 +1971,7 @@ dependencies = [
 [[package]]
 name = "dango-account-multi"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-account-factory",
@@ -1983,7 +1983,7 @@ dependencies = [
 [[package]]
 name = "dango-account-spot"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-auth",
@@ -1994,7 +1994,7 @@ dependencies = [
 [[package]]
 name = "dango-auth"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "alloy",
  "anyhow",
@@ -2009,7 +2009,7 @@ dependencies = [
 [[package]]
 name = "dango-bank"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2019,7 +2019,7 @@ dependencies = [
 [[package]]
 name = "dango-client"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "aes-gcm",
  "anyhow",
@@ -2036,7 +2036,7 @@ dependencies = [
 [[package]]
 name = "dango-dex"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2046,7 +2046,7 @@ dependencies = [
 [[package]]
 name = "dango-genesis"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-account-factory",
@@ -2073,7 +2073,7 @@ dependencies = [
 [[package]]
 name = "dango-lending"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-account-factory",
@@ -2084,7 +2084,7 @@ dependencies = [
 [[package]]
 name = "dango-oracle"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-lending",
@@ -2096,7 +2096,7 @@ dependencies = [
 [[package]]
 name = "dango-taxman"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2106,7 +2106,7 @@ dependencies = [
 [[package]]
 name = "dango-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "borsh 1.5.7",
@@ -2124,7 +2124,7 @@ dependencies = [
 [[package]]
 name = "dango-vesting"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2134,7 +2134,7 @@ dependencies = [
 [[package]]
 name = "dango-warp"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "dango-types",
@@ -2810,7 +2810,7 @@ dependencies = [
 [[package]]
 name = "grug"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "borsh 1.5.7",
  "grug-client",
@@ -2828,7 +2828,7 @@ dependencies = [
 [[package]]
 name = "grug-app"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "borsh 1.5.7",
  "chrono",
@@ -2847,7 +2847,7 @@ dependencies = [
 [[package]]
 name = "grug-client"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2862,7 +2862,7 @@ dependencies = [
 [[package]]
 name = "grug-crypto"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "blake2",
  "blake3",
@@ -2879,7 +2879,7 @@ dependencies = [
 [[package]]
 name = "grug-db-memory"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "grug-app",
  "grug-jmt",
@@ -2890,7 +2890,7 @@ dependencies = [
 [[package]]
 name = "grug-ffi"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "borsh 1.5.7",
  "grug-types",
@@ -2900,7 +2900,7 @@ dependencies = [
 [[package]]
 name = "grug-jmt"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "borsh 1.5.7",
  "grug-math",
@@ -2913,7 +2913,7 @@ dependencies = [
 [[package]]
 name = "grug-macros"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2923,7 +2923,7 @@ dependencies = [
 [[package]]
 name = "grug-math"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "bnum",
  "borsh 1.5.7",
@@ -2935,7 +2935,7 @@ dependencies = [
 [[package]]
 name = "grug-mock-account"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug-ffi",
@@ -2948,7 +2948,7 @@ dependencies = [
 [[package]]
 name = "grug-mock-bank"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug-ffi",
@@ -2961,7 +2961,7 @@ dependencies = [
 [[package]]
 name = "grug-mock-taxman"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "borsh 1.5.7",
@@ -2976,7 +2976,7 @@ dependencies = [
 [[package]]
 name = "grug-storage"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "bnum",
  "borsh 1.5.7",
@@ -2989,7 +2989,7 @@ dependencies = [
 [[package]]
 name = "grug-testing"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug-app",
@@ -3012,7 +3012,7 @@ dependencies = [
 [[package]]
 name = "grug-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "async-trait",
  "bnum",
@@ -3041,7 +3041,7 @@ dependencies = [
 [[package]]
 name = "grug-vm-rust"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "elsa",
  "grug-app",
@@ -3385,7 +3385,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-ism"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug",
@@ -3395,7 +3395,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-mailbox"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug",
@@ -3405,7 +3405,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug",
@@ -3415,7 +3415,7 @@ dependencies = [
 [[package]]
 name = "hyperlane-va"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "grug",
@@ -4534,7 +4534,7 @@ dependencies = [
 [[package]]
 name = "pyth-types"
 version = "0.0.0"
-source = "git+https://github.com/left-curve/left-curve#a0787d8310a3ab39a6bf87c07b069f0d827c9cc9"
+source = "git+https://github.com/left-curve/left-curve?branch=grug/tendermint_broadcast_response#225944a8cb2ee9f2505898e4546983f33420c7c2"
 dependencies = [
  "anyhow",
  "byteorder",
@@ -5702,9 +5702,8 @@ dependencies = [
 
 [[package]]
 name = "tendermint"
-version = "0.40.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7bed57bd840305efef8e83b752dd63dde3bb0fc1c35b6490f0a4de3a0ffd8dd9"
+version = "0.40.3"
+source = "git+https://github.com/left-curve/tendermint-rs.git?rev=2e323c8#2e323c89088394593b4450f4a20f914434ac0ec4"
 dependencies = [
  "bytes",
  "digest 0.10.7",
@@ -5730,9 +5729,8 @@ dependencies = [
 
 [[package]]
 name = "tendermint-config"
-version = "0.40.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "38aeb44e9e275b3afe31a4f3302dfc5aa1e0aa488a22abb7577634b22b144a22"
+version = "0.40.3"
+source = "git+https://github.com/left-curve/tendermint-rs.git?rev=2e323c8#2e323c89088394593b4450f4a20f914434ac0ec4"
 dependencies = [
  "flex-error",
  "serde",
@@ -5744,9 +5742,8 @@ dependencies = [
 
 [[package]]
 name = "tendermint-proto"
-version = "0.40.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9a218320a6e92ac731ac094169cb742e3203a3ab24d30417b72cfdaab5d50c67"
+version = "0.40.3"
+source = "git+https://github.com/left-curve/tendermint-rs.git?rev=2e323c8#2e323c89088394593b4450f4a20f914434ac0ec4"
 dependencies = [
  "bytes",
  "flex-error",
@@ -5759,9 +5756,8 @@ dependencies = [
 
 [[package]]
 name = "tendermint-rpc"
-version = "0.40.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "93ffcf862b519894f8afa79e5be73e376c3367cbd2bbe0eaf9c653ab01cd8b20"
+version = "0.40.3"
+source = "git+https://github.com/left-curve/tendermint-rs.git?rev=2e323c8#2e323c89088394593b4450f4a20f914434ac0ec4"
 dependencies = [
  "async-trait",
  "bytes",
@@ -6120,8 +6116,7 @@ dependencies = [
 [[package]]
 name = "tower-abci"
 version = "0.19.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1f20500d25342b86338bc9e053694dd199e9dafbc1044126a54ce378bfbbcfa5"
+source = "git+https://github.com/left-curve/tower-abci.git?rev=6ba8190#6ba81903150128456c7c2949ca484972621c4e00"
 dependencies = [
  "bytes",
  "futures",
