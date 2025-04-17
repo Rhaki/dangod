@@ -12,14 +12,14 @@ version      = "0.0.0"
 anyhow             = "1"
 bip32              = "0.5"
 clap               = "4"
-dango-client       = { git = "https://github.com/left-curve/left-curve", branch = "grug/tendermint_broadcast_response" }
-dango-genesis      = { git = "https://github.com/left-curve/left-curve", branch = "grug/tendermint_broadcast_response" }
-dango-types        = { git = "https://github.com/left-curve/left-curve", branch = "grug/tendermint_broadcast_response" }
+dango-client       = { git = "https://github.com/left-curve/left-curve", branch = "grug/search_tx_decode" }
+dango-genesis      = { git = "https://github.com/left-curve/left-curve", branch = "grug/search_tx_decode" }
+dango-types        = { git = "https://github.com/left-curve/left-curve", branch = "grug/search_tx_decode" }
 dangod-types       = { path = "types" }
-grug               = { git = "https://github.com/left-curve/left-curve", branch = "grug/tendermint_broadcast_response" }
-grug-client        = { git = "https://github.com/left-curve/left-curve", branch = "grug/tendermint_broadcast_response" }
-grug-pyth-types    = { git = "https://github.com/left-curve/left-curve", package = "pyth-types", branch = "grug/tendermint_broadcast_response" }
-grug-types         = { git = "https://github.com/left-curve/left-curve", branch = "grug/tendermint_broadcast_response" }
+grug               = { git = "https://github.com/left-curve/left-curve", branch = "grug/search_tx_decode" }
+grug-client        = { git = "https://github.com/left-curve/left-curve", branch = "grug/search_tx_decode" }
+grug-pyth-types    = { git = "https://github.com/left-curve/left-curve", package = "pyth-types", branch = "grug/search_tx_decode" }
+grug-types         = { git = "https://github.com/left-curve/left-curve", branch = "grug/search_tx_decode" }
 hex                = "0.4"
 home               = "0.5"
 k256               = "0.13"
