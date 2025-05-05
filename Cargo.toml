@@ -12,14 +12,14 @@ version      = "0.0.0"
 anyhow             = "1"
 bip32              = "0.5"
 clap               = "4"
-dango-client       = { git = "https://github.com/left-curve/left-curve" }
-dango-genesis      = { git = "https://github.com/left-curve/left-curve" }
-dango-types        = { git = "https://github.com/left-curve/left-curve" }
+dango-client       = { git = "https://github.com/left-curve/left-curve", rev = "c9e19e0" }
+dango-genesis      = { git = "https://github.com/left-curve/left-curve", rev = "c9e19e0" }
+dango-types        = { git = "https://github.com/left-curve/left-curve", rev = "c9e19e0" }
 dangod-types       = { path = "types" }
-grug               = { git = "https://github.com/left-curve/left-curve" }
-grug-client        = { git = "https://github.com/left-curve/left-curve" }
-grug-pyth-types    = { git = "https://github.com/left-curve/left-curve", package = "pyth-types" }
-grug-types         = { git = "https://github.com/left-curve/left-curve" }
+grug               = { git = "https://github.com/left-curve/left-curve", rev = "c9e19e0" }
+grug-client        = { git = "https://github.com/left-curve/left-curve", rev = "c9e19e0" }
+grug-pyth-types    = { git = "https://github.com/left-curve/left-curve", package = "pyth-types", rev = "c9e19e0" }
+grug-types         = { git = "https://github.com/left-curve/left-curve", rev = "c9e19e0" }
 hex                = "0.4"
 home               = "0.5"
 k256               = "0.13"
